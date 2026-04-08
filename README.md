@@ -26,13 +26,13 @@ The repository is organized around reusable geometry utilities and a single mast
 - `utils/`
   Contains reusable helper code.
 
-  - `utils/analytical_distance_pdfs/`
+  - `utils/distance_pdfs/`
     Analytical and semi-analytical functions for evaluating the source-detector distance distribution `p(rho)`, or the effective distance distribution `p_eff(rho)` for non-uniform illumination and detection.
 
-  - `utils/mc_sampled_distance_pdfs/`
+  - `utils/sampled_distance_pdfs/`
     Monte Carlo sampling utilities that generate random source and detector point pairs and estimate the corresponding sampled distance distributions. These functions are used for geometry visualization and for comparison against the analytical distance distributions.
 
-- `DEMO_SIA_FSD_all_geometries_master.m`
+- `DEMO_SIA_FSD_all_geometries.m`
   The main demonstration script. This script:
   - compares analytical distance distributions against Monte Carlo-sampled distance distributions for the included geometries,
   - visualizes the source and detector geometries,
