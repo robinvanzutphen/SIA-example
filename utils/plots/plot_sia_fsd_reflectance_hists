@@ -1,0 +1,52 @@
+function plot_sia_fsd_reflectance_hists(Cases, R_full, R_sia)
+%PLOT_SIA_FSD_REFLECTANCE_HISTS  Histogram overlays with mean markers.
+
+nC = numel(Cases);
+figure('Color','w');
+tiledlayout(nC,1,'TileSpacing','compact','Padding','compact');
+
+for c = 1:nC
+    ax = nexttile; hold(ax,'on'); box(ax,'on'); grid(ax,'on');
+
+    rf = R_full(c,:); rf = rf(isfinite(rf));
+    rs = R_sia (c,:); rs = rs(isfinite(rs));
+
+    xmin = min([rf(:); rs(:)]);
+    xmax = max([rf(:); rs(:)]);
+    if ~isfinite(xmin) || ~isfinite(xmax) || xmin == xmax
+        xmin = 0; xmax = 1;
+    end
+
+    edgesR = linspace(max(0,xmin), xmax, 40);
+
+    histogram(ax, rf, edgesR, 'Normalization','pdf', 'FaceAlpha',0.35, ...
+              'EdgeColor','none', 'DisplayName','Full S-D');
+    histogram(ax, rs, edgesR, 'Normalization','pdf', 'FaceAlpha',0.35, ...
+              'EdgeColor','none', 'DisplayName','SIA');
+
+    if ~isempty(rf)
+        xline(ax, mean(rf), '-', 'LineWidth',1.8, 'DisplayName','Mean Full S-D');
+    end
+    if ~isempty(rs)
+        xline(ax, mean(rs), '--', 'LineWidth',1.8, 'DisplayName','Mean SIA');
+    end
+
+    xlabel(ax,'Reflectance R');
+    ylabel(ax,'PDF');
+    title(ax, get_case_title(Cases{c}), 'Interpreter','none');
+
+    if c == 1
+        legend(ax,'Location','best');
+    end
+end
+end
+
+function title_str = get_case_title(C)
+if isfield(C,'display_name')
+    title_str = C.display_name;
+elseif isfield(C,'name')
+    title_str = C.name;
+else
+    title_str = 'Case';
+end
+end
