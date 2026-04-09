@@ -35,7 +35,7 @@ when running the code in other environments or with newer software versions.
 ## Runtime and hardware requirements
 
 Running the full demonstration script with default settings launches a large
-number of MCX simulations and can take **15–40 minutes** on modern hardware.
+number of MCX simulations and can take up several minutes on modern hardware.
 A warning is printed at the top of the script with an estimated runtime.
 
 MCX uses **NVIDIA CUDA** for GPU-accelerated photon transport. An NVIDIA GPU
